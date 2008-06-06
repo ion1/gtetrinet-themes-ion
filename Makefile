@@ -2,6 +2,9 @@ sources := blocks.xcf
 targets := $(sources:%.xcf=%.png)
 dist    := README theme.cfg
 
+release := 0.1
+tarball := ion-$(release).tar.gz
+
 gimp := gimp -nidfc
 
 all : $(targets)
@@ -11,10 +14,10 @@ all : $(targets)
 	  $(gimp) -b -
 
 .PHONY : dist
-dist : ../ion.tar.gz
+dist : ../$(tarball)
 	@printf "dist: %s\n" "$<"
 
-../ion.tar.gz : $(targets) $(dist)
+../$(tarball) : $(targets) $(dist)
 	$(RM) -r dist
 
 	install -m0755 -d dist/ion
