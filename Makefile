@@ -22,9 +22,9 @@ dist : ../$(tarball)
 
 	@if ! pristine-tar checkout "$@"; then \
 	  printf "No preexisting release, creating one...\n" && \
-	  install -m0755 -d dist/ion &&  \
-	  install -m0644 -t dist/ion $^ && \
-	  tar zcf "$@" -C dist ion && \
+	  install -m0755 -d dist/ion-$(release) &&  \
+	  install -m0644 -t dist/ion-$(release) $^ && \
+	  tar zcf "$@" -C dist ion-$(release) && \
 	  pristine-tar commit "$@" master; fi
 
 	$(RM) -r dist
