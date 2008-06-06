@@ -20,9 +20,12 @@ dist : ../$(tarball)
 ../$(tarball) : $(targets) $(dist)
 	$(RM) -r dist
 
-	install -m0755 -d dist/ion
-	install -m0644 -t dist/ion $^
-	tar zcf "$@" -C dist ion
+	@if ! pristine-tar checkout "$@"; then \
+	  printf "No preexisting release, creating one...\n" && \
+	  install -m0755 -d dist/ion &&  \
+	  install -m0644 -t dist/ion $^ && \
+	  tar zcf "$@" -C dist ion && \
+	  pristine-tar commit "$@" master; fi
 
 	$(RM) -r dist
 
