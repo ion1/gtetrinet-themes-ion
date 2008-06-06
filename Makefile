@@ -12,6 +12,7 @@ all : $(targets)
 %.png : %.xcf convert-to-png.scm.in
 	sed -re 's/%SOURCE%/$</g; s/%TARGET%/$@/g' convert-to-png.scm.in | \
 	  $(gimp) -b -
+	@printf "\n"  # Gimp likes to leave \n out from the last line.
 
 theme.cfg : theme.cfg.in
 	sed -re 's/%RELEASE%/$(release)/g' "$<" >"$@"
