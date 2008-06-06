@@ -1,0 +1,18 @@
+(let* ((source "%SOURCE%")
+       (target "%TARGET%")
+       (img (car (gimp-file-load RUN-NONINTERACTIVE source source))))
+  (gimp-image-flatten img)
+  (file-png-save2 RUN-NONINTERACTIVE img (car (gimp-image-active-drawable img))
+                  target target
+                  FALSE ; interlace
+                  9     ; compression
+                  FALSE ; bkgd
+                  FALSE ; gama
+                  FALSE ; offs
+                  FALSE ; phys
+                  FALSE ; time
+                  FALSE ; comment
+                  FALSE ; svtrans
+                  )
+  (gimp-image-delete img)
+  (gimp-quit TRUE))
