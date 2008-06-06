@@ -1,5 +1,5 @@
 sources := blocks.xcf
-targets := $(sources:%.xcf=%.png)
+targets := $(sources:%.xcf=%.png) theme.cfg
 dist    := README theme.cfg
 
 release := 0.1
@@ -12,6 +12,9 @@ all : $(targets)
 %.png : %.xcf convert-to-png.scm.in
 	sed -re 's/%SOURCE%/$</g; s/%TARGET%/$@/g' convert-to-png.scm.in | \
 	  $(gimp) -b -
+
+theme.cfg : theme.cfg.in
+	sed -re 's/%RELEASE%/$(release)/g' "$<" >"$@"
 
 .PHONY : dist
 dist : ../$(tarball)

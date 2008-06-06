@@ -1,5 +1,5 @@
 [Theme]
-Name=ion
+Name=ion %RELEASE%
 Author=Johan Kiviniemi (based on the GTetrinet default theme by Zillidot <kswong@zip.com.au>)
 Description=A clean, functional theme
 
